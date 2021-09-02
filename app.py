@@ -39,9 +39,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    msg = event.message.text
+    if ['熊哥', '貝卡'] in msg: #以下皆為訊息判別式
+        msg = TextSendMessage(text='好帥')
+    line_bot_api.reply_message(event.reply_token,msg)
 
 
 if __name__ == "__main__":
