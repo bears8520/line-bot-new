@@ -40,9 +40,50 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    if '貝卡' in msg: #以下皆為訊息判別式
+    girls = []
+    with open('girls.txt', 'r', encoding='utf-8-sig') as f:
+        for girl in f:
+            girls.append(girl.strip()) #將文件內的字一行一行放入list
+    i = random.choice(girls)#隨機從list中拿出一個
+
+    if msg in ['熊哥', '貝卡']: #以下皆為訊息判別式
         msg = TextSendMessage(text='好帥')
+    elif msg == '抽':#回傳圖片
+        msg = ImageSendMessage(
+        original_content_url=i, 
+        preview_image_url=i
+    )
+    elif msg in ['抽屁', '幹', '機器人閉嘴', '閉嘴', '靠', '低能']:
+        msg = TextSendMessage(text='炒殺小?')
+    elif '87' in msg:
+        msg = TextSendMessage(text='你才87')
+    elif '想我的+1' in msg:
+        msg = TextSendMessage(text='+1')
     line_bot_api.reply_message(event.reply_token,msg)
+
+    elif msg == '!貝卡': #選單製造
+        msg = TemplateSendMessage(
+            alt_text='請用手機操作選單',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/GAghGccl.jpg',
+                title='嗨~',
+                text='你今天想要什麼<3?',
+                actions=[
+                    URITemplateAction(
+                        label='貝卡小屋',
+                        uri='https://home.gamer.com.tw/homeindex.php?owner=jiff852'
+                    ),
+                    URITemplateAction(
+                        label='貝卡FB粉專',
+                        uri='https://www.facebook.com/bears0518/'
+                    ),
+                    URITemplateAction(
+                        label='貝卡YouTube',
+                        uri='https://www.youtube.com/channel/UC4TlloLCVjhIyXoBTmDIPFw'
+                    )
+                ]
+            )
+        )
 
 
 if __name__ == "__main__":
