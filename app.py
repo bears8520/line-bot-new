@@ -60,8 +60,6 @@ def handle_message(event):
         msg = TextSendMessage(text='你才87')
     elif '想我的+1' in msg:
         msg = TextSendMessage(text='+1')
-    line_bot_api.reply_message(event.reply_token,msg)
-
     elif msg == '!貝卡': #選單製造
         msg = TemplateSendMessage(
             alt_text='請用手機操作選單',
@@ -85,6 +83,7 @@ def handle_message(event):
                 ]
             )
         )
+    line_bot_api.reply_message(event.reply_token,msg)
 
 
 if __name__ == "__main__":
