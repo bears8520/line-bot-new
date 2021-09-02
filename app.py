@@ -54,6 +54,11 @@ def handle_message(event):
         original_content_url=i, 
         preview_image_url=i
     )
+    elif '太油' in msg:
+        msg = ImageSendMessage(
+        original_content_url='https://i.imgur.com/JhnW1gq.jpg', 
+        preview_image_url='https://i.imgur.com/JhnW1gq.jpg'
+    )
     elif msg in ['抽屁', '幹', '機器人閉嘴', '閉嘴', '靠', '低能']:
         msg = TextSendMessage(text='炒殺小?')
     elif '87' in msg:
