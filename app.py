@@ -61,7 +61,7 @@ def handle_message(event):
     )
     elif msg in ['抽屁', '幹', '機器人閉嘴', '閉嘴', '靠', '低能']:
         msg = TextSendMessage(text='炒殺小?')
-    elif '87' in msg:
+    elif msg == '87':
         msg = TextSendMessage(text='你才87')
     elif '想我的+1' in msg:
         msg = TextSendMessage(text='+1')
